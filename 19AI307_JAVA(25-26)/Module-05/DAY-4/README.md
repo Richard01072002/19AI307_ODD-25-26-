@@ -1,87 +1,68 @@
-# Ex.No:5(D) MULTITHREADING -SYNCHRONIZATION
+# Ex.No:5(D) THREAD PRIORITY
 
 ## QUESTION:
-Synchronize deposit method in a BankAccount class, simulate deposits from multiple threads.
+Write a java program for determine the priority and name of the current thread.
 
-Input:
-
-3 100 200 300
-Output:
-
-Final Balance: 600
+Note : Read the threadname from the User
 
 ## AIM:
-To write a Java program that synchronizes deposits from multiple threads to compute the final balance.
+To read a thread name from the user and display the current thread’s name and priority.
 
 ## ALGORITHM :
+1.	Read the thread name from the user.
+2.	Get the reference of the current thread using Thread.currentThread().
+3.	Set the name of the current thread using setName().
+4.	Retrieve the thread’s name and priority using getName() and getPriority().
+5.	Display both values.
 
-1.	Start the program.
-2.	Import the necessary package 'java.util'
-3.	Read the number of deposit operations.
-4.	Create a BankAccount object with a synchronized deposit() method.
-5.	Create a thread pool with n threads.
-6.	For each deposit amount entered by the user, submit a task to the thread pool that calls account.deposit(amount).
-7.	Shut down the executor and wait until all threads finish execution.
-8.	Retrieve and print the final account balance.
-9.	End the program.
+
 
 
 ## PROGRAM:
-
-```
-Program to implement a Synchronization concept using Java
+ ```
+/*
+Program to implement a Thread Priority Concept using Java
 Developed by: Richardson A
 Register Number: 212222233005
+*/
 ```
 
 ## SOURCE CODE:
-
 ```
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Scanner;
 
-class BankAccount 
-{
-    private int balance = 0;
-    public synchronized void deposit(int amount) 
-    {
-        balance += amount;
-    }
-    public int getBalance() 
-    {
-        return balance;
-    }
-}
+public class ThreadInfoExample {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-public class BankDepositSync 
-{
-    public static void main(String[] args) throws Exception 
-    {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        BankAccount account = new BankAccount();
-        ExecutorService executor = Executors.newFixedThreadPool(n);
+        // Read thread name from user
+        String threadName = scanner.nextLine();
 
-        for (int i = 0; i < n; i++) 
-        {
-            int amount = sc.nextInt();
-            executor.execute(() -> account.deposit(amount));
-        }
-        executor.shutdown();
-        executor.awaitTermination(1, TimeUnit.SECONDS);
-        System.out.println("Final Balance: " + account.getBalance());
+        // Create a thread with the given name
+        Thread t = new Thread(() -> {
+            // Thread work can go here if needed
+        }, threadName);
+
+        // Display priority and name
+        System.out.println("Priority of Thread: " + t.getPriority());
+        System.out.println("Name of Thread: " + t.getName());
+
+        // Display full thread info (toString())
+        System.out.println(t);
+
+        scanner.close();
     }
 }
 ```
-
 
 ## OUTPUT:
+<img width="1313" height="265" alt="image" src="https://github.com/user-attachments/assets/f363db08-7cdb-4761-a39c-556870905f3c" />
 
-<img width="602" height="502" alt="image" src="https://github.com/user-attachments/assets/a98abce5-72c6-448d-ba5c-a36ad9295282" />
 
 
 ## RESULT:
-Thus, the program that synchronizes deposits from multiple threads to compute the final balance is written and executed successfully.
+The program successfully reads the thread name from the user and displays the current thread’s name and priority.
+
 
 
 
