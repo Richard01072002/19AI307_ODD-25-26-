@@ -40,8 +40,8 @@ To write a java program that evaluates two fighters’ scores using selected jud
 
 ```
 Program to implement a Interface using Java
-Developed by: Sathyaa R
-RegisterNumber: 212223100052
+Developed by: Richardson A
+Register Number: 212222233005
 ```
 
 ## SOURCE CODE:
@@ -95,4 +95,5 @@ public class prog
 
 ## RESULT:
 Thus, the program that evaluates two fighters’ scores using selected judging criteria to decide whether the result is WIN, LOSE, or DRAW is written and execited successfully.
+
 
