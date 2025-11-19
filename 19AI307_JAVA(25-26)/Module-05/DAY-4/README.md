@@ -1,4 +1,4 @@
-# Ex.No:5(E) MULTITHREADING -SYNCHRONIZATION
+# Ex.No:5(D) MULTITHREADING -SYNCHRONIZATION
 
 ## QUESTION:
 Synchronize deposit method in a BankAccount class, simulate deposits from multiple threads.
@@ -82,4 +82,5 @@ public class BankDepositSync
 
 ## RESULT:
 Thus, the program that synchronizes deposits from multiple threads to compute the final balance is written and executed successfully.
+
 
