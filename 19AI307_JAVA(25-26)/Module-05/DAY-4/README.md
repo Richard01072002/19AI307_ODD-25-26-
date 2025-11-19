@@ -1,31 +1,35 @@
-# Ex.No:5(D) THREAD PRIORITY
+# Ex.No:5(E) MULTITHREADING -SYNCHRONIZATION
 
 ## QUESTION:
-Write a java program to determine the priority and name of the current thread.
+Synchronize deposit method in a BankAccount class, simulate deposits from multiple threads.
 
-Note : Read the threadname from the User
+Input:
 
+3 100 200 300
+Output:
+
+Final Balance: 600
 
 ## AIM:
-To write a java program to determine the priority and name of the current thread.
-
+To write a Java program that synchronizes deposits from multiple threads to compute the final balance.
 
 ## ALGORITHM :
 
 1.	Start the program.
 2.	Import the necessary package 'java.util'
-3.	Read a thread name from the user.
-4.	Get the reference to the current thread using Thread.currentThread().
-5.	Set the thread’s name to the user-entered value.
-6.	Retrieve the thread’s priority and display it.
-7.	Display the thread’s name and print the thread object.
-8.	End the program.
+3.	Read the number of deposit operations.
+4.	Create a BankAccount object with a synchronized deposit() method.
+5.	Create a thread pool with n threads.
+6.	For each deposit amount entered by the user, submit a task to the thread pool that calls account.deposit(amount).
+7.	Shut down the executor and wait until all threads finish execution.
+8.	Retrieve and print the final account balance.
+9.	End the program.
 
 
 ## PROGRAM:
 
 ```
-Program to implement a Thread Priority Concept using Java
+Program to implement a Synchronization concept using Java
 Developed by: Richardson A
 Register Number: 212222233005
 ```
@@ -34,20 +38,38 @@ Register Number: 212222233005
 
 ```
 import java.util.*;
+import java.util.concurrent.*;
 
-public class CurrentThreadExample 
+class BankAccount 
 {
-    public static void main(String[] args) 
+    private int balance = 0;
+    public synchronized void deposit(int amount) 
+    {
+        balance += amount;
+    }
+    public int getBalance() 
+    {
+        return balance;
+    }
+}
+
+public class BankDepositSync 
+{
+    public static void main(String[] args) throws Exception 
     {
         Scanner sc = new Scanner(System.in);
-        String name = sc.nextLine();
+        int n = sc.nextInt();
+        BankAccount account = new BankAccount();
+        ExecutorService executor = Executors.newFixedThreadPool(n);
 
-        Thread t = Thread.currentThread();
-        t.setName(name);
-
-        System.out.println("Priority of Thread: " + t.getPriority());
-        System.out.println("Name of Thread: " + t.getName());
-        System.out.println(t);
+        for (int i = 0; i < n; i++) 
+        {
+            int amount = sc.nextInt();
+            executor.execute(() -> account.deposit(amount));
+        }
+        executor.shutdown();
+        executor.awaitTermination(1, TimeUnit.SECONDS);
+        System.out.println("Final Balance: " + account.getBalance());
     }
 }
 ```
@@ -55,9 +77,9 @@ public class CurrentThreadExample
 
 ## OUTPUT:
 
-<img width="861" height="255" alt="image" src="https://github.com/user-attachments/assets/9ca2fd82-cd0b-4d0b-b95e-f81cf9a69c7f" />
+<img width="602" height="502" alt="image" src="https://github.com/user-attachments/assets/a98abce5-72c6-448d-ba5c-a36ad9295282" />
 
 
 ## RESULT:
-Thus, the program to determine the priority and name of the current thread is written and executed successfully.
+Thus, the program that synchronizes deposits from multiple threads to compute the final balance is written and executed successfully.
 
